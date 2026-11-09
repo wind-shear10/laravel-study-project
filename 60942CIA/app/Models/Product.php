@@ -11,14 +11,6 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected function casts(): array
-    {
-        return [
-            'weight_kg' => 'decimal:3',
-            'price' => 'decimal:2',
-        ];
-    }
-
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
