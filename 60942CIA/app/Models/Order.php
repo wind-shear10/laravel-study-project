@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Order extends Model
 {
-    public $timestamps = false;
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

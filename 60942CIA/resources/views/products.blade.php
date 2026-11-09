@@ -21,6 +21,8 @@
             <td>{{$item->price}}</td>
             <td>{{$item->weight_kg}}</td>
             <td>{{$item->category->name}}</td>
+            <td> <a href="{{ url('/product/destroy/'.$item->id) }}">Удалить</a>
+             <a href="{{ url('/product/edit/'.$item->id) }}">Редактировать</a> </td>
         </tr>
     @endforeach
     </table>
