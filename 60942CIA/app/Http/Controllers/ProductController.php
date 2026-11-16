@@ -12,9 +12,11 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): View
     {
-        return view('products', ['products' => Product::all()]);
+        $perpage = $request->perpage ?? 2;
+
+        return view('products', ['products' => Product::paginate($perpage)->withQueryString()]);
     }
 
     /**
@@ -75,7 +77,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validated = $request -> validate([
+        $validated = $request->validate([
             'name' => 'required|max:255',
             'price' => 'required|numeric|decimal:0,2|min:0|max:9999999999.99',
             'weight_kg' => 'required|numeric|decimal:0,3|min:0|max:9999999.999',
@@ -85,6 +87,7 @@ class ProductController extends Controller
         $product = Product::all()->where('id', $id)->first();
         $product->update($validated);
         $product->save();
+
         return redirect('/products');
     }
 
@@ -94,6 +97,7 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         Product::destroy($id);
+
         return redirect('/products');
     }
 }

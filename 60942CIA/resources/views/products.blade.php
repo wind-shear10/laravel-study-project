@@ -26,5 +26,6 @@
         </tr>
     @endforeach
     </table>
+{{ $products->links() }}
 </body>
 </html>
